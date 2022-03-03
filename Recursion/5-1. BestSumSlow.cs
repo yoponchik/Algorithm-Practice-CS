@@ -16,7 +16,7 @@
 
             if (remainderCombination != null){
                 var combination = remainderCombination.Append(num).ToArray();
-                if (shortestCombination == Array.Empty<int>() || combination.Length < shortestCombination.Length){
+                if (shortestCombination == null || combination.Length < shortestCombination.Length){
                     shortestCombination = combination;
                 }
             }
