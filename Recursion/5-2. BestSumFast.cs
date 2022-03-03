@@ -1,27 +1,51 @@
 ﻿using System;
 
-class GridTravellerFast
+class BestSumFast
 {
-    static Dictionary<Tuple<int, int>, long> _memo = new Dictionary<Tuple<int, int>, long>();
 
-    static long GridTravel(int m, int n)
+    static Dictionary<int, int[]> _memo = new Dictionary<int, int[]>();
+
+    static int[] BestSum(int targetSum, int[] numbers)
     {
-        Tuple<int, int> key;
-        key = Tuple.Create(m, n);
+        int[] emptyArray = new int[0];
 
-        if (_memo.ContainsKey(key)) { return _memo[key]; }
-        if (m == 1 && n == 1) return 1;
-        if (m == 0 || n == 0) return 0;
+        if (_memo.ContainsKey(targetSum)) { return _memo[targetSum]; }
+        if (targetSum == 0) { return emptyArray; }
+        if (targetSum < 0) return null;
 
-        _memo[key] = GridTravel(m - 1, n) + GridTravel(m, n - 1);
-        return _memo[key];
+        int[] shortestCombination = null;
+
+        foreach (var num in numbers)
+        {
+            var remainder = targetSum - num;
+            int[] remainderCombination = BestSum(remainder, numbers);
+
+            if (remainderCombination != null)
+            {
+                var combination = remainderCombination.Append(num).ToArray();
+                if (shortestCombination == null || combination.Length < shortestCombination.Length)
+                {
+                    shortestCombination = combination;
+                }
+            }
+        }
+
+        _memo[targetSum] = shortestCombination;
+        return shortestCombination;
+
     }
+
     static void Main(string[] args)
     {
-        Console.WriteLine(GridTravel(1, 1));
-        Console.WriteLine(GridTravel(2, 3));
-        Console.WriteLine(GridTravel(3, 2));
-        Console.WriteLine(GridTravel(3, 3));
-        Console.WriteLine(GridTravel(18, 18));
+        int[] numbers = new int[] { 3, 2, 5 };
+
+        int[] result = BestSum(8, numbers);
+
+        if (result != null)
+        {
+            Console.WriteLine(String.Join(",", result));
+        }
+        else { Console.WriteLine("NULL"); }
     }
+
 }
