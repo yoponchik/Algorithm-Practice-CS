@@ -1,0 +1,69 @@
+1. Determine Problem Type and Visualize
+	-This is a Combinational-CAN problem: Therefore both negative and positive base case: True or false
+		-What is a base case? Just the possible final outcome.
+	-Start with the target Sum
+		-the target Sum node branches out by the numbers in the array
+	-Where does the recursion happen?
+		-Recursion is basically, how do you get from the bottom node to the top node?
+		-Recursion happens at the node; Calculation happens at the branch
+		-When you use one of the numbers in the array again. 
+	-Node == Output or the return value, Branch == Calculation with previous Node (which means use recursion)
+-----------------------------
+2. Create a class
+----------------------------
+3. Create a STATIC Method
+	-What is the output and the input type?
+		-OUTPUT: BOOL
+		-INPUT: INT, INT[]
+	-static bool CanSum(int targetSum, int[] numbers)
+
+	-Set the Base Case: When do the numbers add up and when do they not?
+		-if(targetSum == 0) {return true;}
+		-if(targetSum < 0) {return false;}
+			-we know they do not add up when it does not perfectly subtract to 0
+	-Computation
+		-Make recursive call for every element of the numbers array
+			-Go through all the arrays one by one, and see if there is a match
+			-foreach(var num in numbers)
+		-What calculation are you doing at the branch?
+			-Subtract the num (numbers in the array) from the targetsum or remainder; 
+		-Recursion: always happens at node; so ask how do we get to the node?
+			-We get to a node, when checking all the numbers with the targetsum or remainder
+			-Therefore, a node has a Output BOOL state, from calculating with previous branches
+				-if(CanSum(remainder, numbers) == true){return true;}
+		-Outside of the foreach loop, if there are no compatible numbers return false
+			-return false;
+
+-------------------------
+4. Main function
+	-When inputting array of numbers, C# doesn't allow you to input raw arrays
+		-because int[] is call by reference not call by value
+		-Doesn't work: Console.WriteLine(CanSum(300, { 7, 14 })); 
+		-Works:	       int[] numbers = {7,2,etc}; Console.WriteLine(CanSum(300, numbers));   
+		
+
+-----------------------------------------
+5. Memoize 
+	-Create a dictionary
+		-What is the key, and the value?
+			-Key(INPUT) is INT type, Value(OUTPUT) is BOOL type.
+		-static Dictionary<Tuple<int, int[]>> _memo = new Dictionary<Tuple<int, int[]>>();
+	-Declare and Initialize the Tuple key
+		-Tuple<int, int[]> key; 	key = Tuple.Create(targetSum, numbers);
+	-Create a base case for memo output and return the memo value
+		-if(_memo[key].ContainsKey(key)) {return _memo[key];}
+ 	-Memoize all the outputs 
+		-Memoize Positive Output and return original output
+			-_memo[key] = true; return true;
+		-Memoize Negative Output and return original output
+			-_memo[key] = false; return false;
+		-We don't simply output the memo, because it may have some other bool value stored from previous recursion
+
+---------------------------------------------------------
+IMPORTANT
+-MAIN FUNCTION
+	-Remember to declare the INT[] ARRAY when inputting array of numbers
+-DICTIONARY
+	-The Key is always the input, Value is always the output
+	-Make sure the data types match up
+	

@@ -1,0 +1,46 @@
+1. Determine the  Problem Type and Visualize it
+	-This is a COMBO-Count type: So, we are essentially checking if the string matches the prefix of the target string
+	-There will be 3 Cases: Positive, Negative, and base
+---------------------------------------
+2. Create a class
+---------------------------------------
+3. Create a STATIC method
+	-What is the output type and the input type?
+		-OUTPUT: int
+		-INPUT: int, int[]
+	-static int CountConstruct(string target, string[] wordBank)
+---------------------------------------
+4. Cases
+	-Base Case: if(target == "") {return 1;}
+	-Negative Case:
+		-var totalCount = 0;
+		(In the end of the method)
+---------------------------------------
+5. Calculation
+	-Iterate through the elements of the STRING[] wordBank and do recursion
+		-foreach(var word in wordBank)
+	-Check if the words line up
+		-if(target.IndexOf(word) == 0)
+	-Store the Concatenated word by using Substring
+		-var suffix = target.Substring(word.Length);
+	-Calculate using Recursion
+		-var numWays = CountConstruct(suffix , wordBank);
+	-Return totalCount;
+		-we can't return in the middle of the for loop because we have to through the whole target word
+---------------------------------------
+6. Memoize it
+	-Create a STATIC Dictionary
+		-static Dictionary<string, int> _memo = new Dictionary<string, int>();
+	-Create Base Case for the Memo Output
+		-if(_memo.ContainsKey[target]) {return 1;}
+	-Memo the output
+		-_memo[target] = totalCount;
+		-return totalCount;
+---------------------------------------
+7. Main Function
+	-declare a new STRING[] wordBank
+		-string[] wordBank = new string[] { "s", "n", "i", "de", "d", "e", "sni" };
+	-Print
+		-Console.WriteLine(CountConstruct("snide", wordBank));
+---------------------------------------
+IMPORTANT

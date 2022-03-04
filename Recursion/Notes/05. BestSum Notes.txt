@@ -1,0 +1,81 @@
+1. Determine the  Problem Type
+	-This is a Combo-How Problem, which means we have to find the best way to find the combination
+	-In this case, we look at the array length and compare
+	-When we iterate through the recursion with every array element (branches)
+		-when it is not Negative Combo Case, we can return it early
+---------------------------------------
+2. Create a class
+	class BestSum
+---------------------------------------
+3. Create a STATIC method
+	-What is the output type and the input type?
+		-OUTPUT: int[]
+		-INPUT: int, int[]
+	static int[] BestSum(int targetSum, int[] numbers)
+---------------------------------------
+4. Cases
+	-3 Types of Cases
+		-Base Case: when the targetSum is 0, we return empty ARRAY
+		-Positive Combo Case: when the remainderCombination is not null
+			-store the element into shortenedCombination ARRAY
+			if the shortestCombination Array == null or shortenedCombination has shorter length than shortestCombination
+			-shortestCombination ARRAY = shortenedCombination
+	-Base Case
+		-Declare an empty array
+			-int[] emptyArray = Array.Empty<int>();
+		-if(targetSum == 0) {return emptyArray;}
+	-Negative Combo Case		
+		-if(targetSum < 0) {return null;}
+	-Positive Combo Case
+		-later
+---------------------------------------
+5. Calculation
+	-Iterate through the numbers ARRAY (taking all BRANCHES) and do recursion
+		-foreach (var num in numbers)
+	-Calculate (BRANCH)
+		-var remainder = targetSum - num;
+	-Perform recursion to get to the Node
+		- var remainderCombination = BestSum(remainder, numbers);
+	-Prepare to Bubble up to the next Node
+		-if(remainderCombination != null)
+		-if not null, it means that the combination is valid and we can append it
+			-validCombination = remainderCombination.Append(num).ToArray();
+	-Bubble up the shortest combination
+		-Outside the foreach loop, declare a shortestCombination ARRAY and make it null
+			-int[] shortestCombination = null;
+		-2 conditions: (1) if validCombination is shorter than shortestCombination  OR (2) shortestCombination == null
+			-if(shortestCombination == null || validCombination < (shortestCombination )
+			-{ shortestCombination = validCombination}	
+	-Outside the foreach loop return the NEGATIVE Combo Case
+		-Since the shortestCombination is already null outside the loop, we can return it
+			-return shortestCombination 	
+	-In this case, we can't get out of the loop early to return the shortestCombination, because we have to compare with every element in numbers ARRAY
+---------------------------------------
+6. Memoize it
+	-What is the key (input) type and the value (output) type?
+		-Key: int
+		-Value: int[]
+	-Create a STATIC Dictionary		
+		-static Dictionary<int, int[]> _memo = new Dictionary<int, int[]>();
+	-Create a BASE case for returning _memo value
+		-if(_memo.ContainsKey(targetSum)) {return _memo[targetSum];}
+	-Store the OUTPUT to _memo
+		-_memo[targetSum] = shortestCombination;
+	-Return shortestCombination (Not _memo, because it can be null)
+		-return shortestCombination;
+---------------------------------------
+7. Main Function
+	-Declare a new int[]
+		-int[] numbers = new int[] {3, 2, 5};
+	-Because the output can be null, we have to catch the null
+		-First calculate the result
+			-int[] result = BestSum(8, numbers);
+		-if(result != null) {Console.WriteLine(String.Join(",", result));}
+		-else {Console.WriteLine("NULL");}
+---------------------------------------
+IMPORTANT
+	-Don't forget the <int>(); at the end of Array.Empty<int>();
+	-NULL CATCHING
+		1. store result
+		2. if result != null; print the String.Join(",", result)
+		3. if null, print null

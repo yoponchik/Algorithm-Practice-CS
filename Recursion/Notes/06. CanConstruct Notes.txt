@@ -1,0 +1,68 @@
+1. Determine the  Problem Type and Visualize
+	- This is a Combo-Can Type: So only 2 types of outputs; 3 Cases: Base case, Negative and Positive case
+	-The tree starts with the target
+		-the target Node branches out by the elements in the wordBank STRING[] ARRAY
+	-Where does the recursion happen?
+		-Recursion happens at the Base Case/remaining string(Node), which checks the calculation of all the elements (Branches)		
+---------------------------------------
+2. Create a class
+	-class CanConstruct
+---------------------------------------
+3. Create a STATIC method
+	-What is the output type and the input type?
+		-OUTPUT: bool
+		-INPUT: string, string[]
+
+	-static bool CanConstruct(string target, string[] wordBank)
+---------------------------------------
+4. Cases
+	-Three Cases
+		-Base Case
+			-if(target == "") {return true;}
+		-Negative Case: false
+		-Positive: True
+---------------------------------------
+5. Calculation
+	-(BRANCH)
+		-need to do recursive call for every element in STRING[] ARRAY wordBank 
+			-foreach(var word in wordBank)
+		-check if the word in the wordBank fits the prefix of the target
+			-if(target.IndexOf(word) == 0)
+		-If it fits, then cut out the word from the target and store into suffix
+			-var suffix = target.Substring(word.Length)
+	-(NODE)
+		-Do recursion
+			-Can store the result, but we'll take it straight to the if condition
+			-if(CanConstruct(suffix, wordBank) == true) 
+	-(BUBBLE UP)
+		-POSITIVE Combo Output		
+			-{return true;}
+	
+		-NEGATIVE Combo Output: Outside For loop
+			-return false;
+---------------------------------------
+6. Memoize it
+	-Create static Dictionary
+		-KEY: string
+		-VALUE: bool
+		-static Dictionary<string, bool> _memo = new Dictionary<string, bool>();
+	-Create base case for _memo
+		-if(_memo.ContainsKey(target)) {return _memo[target];}
+	-Memoize the outputs
+		-POSITIVE Combo Output
+			-_memo[target] = true;
+			-return true;
+		-NEGATIVE Combo Output
+			-_memo[target] = false;
+			-return false;
+---------------------------------------
+7. Main Function
+	-Initialize new string
+		-string[] wordBank = new string[] { "ab", "cd", "efg" };
+---------------------------------------
+IMPORTANT
+	-Checking if word fits prefix of the input of the function
+		-target.IndexOf(word)
+	-Cutting out the prefix of the target
+		-target.Substring(word.Length)
+		-REMEMBER THE word.Length; the substring needs to know how much of the target to cut off
