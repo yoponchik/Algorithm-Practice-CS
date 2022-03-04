@@ -13,10 +13,8 @@ class CountConstructFast
 
         var totalCount = 0;
 
-        foreach (var word in wordBank)
-        {
-            if (target.IndexOf(word) == 0)
-            {
+        foreach (var word in wordBank){
+            if (target.IndexOf(word) == 0){
                 var suffix = target.Substring(word.Length)
                 var numWays = CountConstruct(suffix, wordBank);
                 totalCount += numWays;
