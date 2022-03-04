@@ -17,8 +17,8 @@ class CountConstructFast
         {
             if (target.IndexOf(word) == 0)
             {
-                var numWaysForRest = CountConstruct(target.Substring(word.Length), wordBank);
-                totalCount += numWaysForRest;
+                var numWays = CountConstruct(target.Substring(word.Length), wordBank);
+                totalCount += numWays;
             }
         }
 

@@ -9,12 +9,10 @@ class CountConstructSlow
 
         var totalCount = 0;
 
-        foreach (var word in wordBank)
-        {
-            if (target.IndexOf(word) == 0)
-            {
-                var numWaysForRest = CountConstruct(target.Substring(word.Length), wordBank);
-                totalCount += numWaysForRest;
+        foreach (var word in wordBank){
+            if (target.IndexOf(word) == 0){
+                var numWays = CountConstruct(target.Substring(word.Length), wordBank);
+                totalCount += numWays;
             }
         }
 
