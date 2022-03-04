@@ -1,5 +1,5 @@
 1. Determine Problem Type and Visualize
-	-This is a Combinational-BOOLEAN problem: Therefore both negative and positive base case
+	-This is a Combinational-CAN problem: Therefore both negative and positive base case: True or false
 		-What is a base case? Just the possible final outcome.
 	-Start with the target Sum
 		-the target Sum node branches out by the numbers in the array
