@@ -15,9 +15,9 @@
             int[] remainderCombination = BestSum(remainder, numbers);
 
             if (remainderCombination != null){
-                var combination = remainderCombination.Append(num).ToArray();
-                if (shortestCombination == null || combination.Length < shortestCombination.Length){
-                    shortestCombination = combination;
+                var shortenedCombination = remainderCombination.Append(num).ToArray();
+                if (shortestCombination == null || shortenedCombination.Length < shortestCombination.Length){
+                    shortestCombination = shortenedCombination;
                 }
             }
         }
