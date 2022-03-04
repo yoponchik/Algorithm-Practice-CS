@@ -2,6 +2,7 @@
 	-This is a Combinational-HOW Problem: Therefore, there are three cases. Base Case, None Case, and Combo case
 	-The tree is similar to the CanSum tree; however, instead of bubbling up the BOOL output, we have to start bubbling an array
 	-At the Positive Node, we take the Combo output ARRAY from the previous Node
+	-We can go through all the possibilities of the array elements(branches), then if we find that it is not the Negative Combo case, we return it early
 
 -----------------------------------------------
 
