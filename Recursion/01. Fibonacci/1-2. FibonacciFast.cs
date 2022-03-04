@@ -22,7 +22,7 @@ class FibonacciFast
         var value = FibFast(n - 1) + FibFast(n - 2);            //instead of just returning the value, we first calculate it and store it
         _memo[n] = value;                                       //store into memo
 
-        return value;                                           //and return the value
+        return value;                                           //and return the value that is not memoed
     }
 
     static void Main(string[] args)
