@@ -1,46 +1,35 @@
-﻿class HowSumFast
-{
-    static Dictionary<int, int[]> _memo = new Dictionary<int, int[]>();
+﻿using System;
 
-    static int[] HowSum(int targetSum, int[] numbers)
+class CanSumFast
+{
+
+    static Dictionary<Tuple<int, int[]>, bool> _memo = new Dictionary<Tuple<int, int[]>, bool>();
+
+
+    static bool CanSum(int targetSum, int[] numbers)
     {
-        int[] emptyArray = new int[0];
-        if (_memo.ContainsKey(targetSum)) { return _memo[targetSum]; }
-        if (targetSum == 0) { return emptyArray; }
-        if (targetSum < 0) { return null; }
+        Tuple<int, int[]> key;
+        key = Tuple.Create(targetSum, numbers);
+
+        if (_memo.ContainsKey(key)) { return _memo[key]; }
+        if (targetSum == 0) { return true; }
+        if (targetSum < 0) { return false; }
 
         foreach (var num in numbers)
         {
-            var remainder = targetSum - num;
-            var remainderResult = HowSum(remainder, numbers);
-
-            if (remainderResult != null)
-            {
-
-                _memo[targetSum] = remainderResult.Append(num).ToArray();
-
-                return _memo[targetSum];
+            int remainder = targetSum - num;
+            if (CanSum(remainder, numbers) == true){
+                _memo[key] = true;
+                return true;
             }
         }
 
-        _memo[targetSum] = null;
-        return null;
+        _memo[key] = false;
+        return false;
     }
-
-    static void Main(string[] arg)
+    static void Main(string[] args)
     {
-        int[] numbers = new int[] { 7, 14 };
-        int[] numbers2 = new int[] { 100, 250 };
-
-        int[] result = HowSum(300, numbers2);
-
-        if (result != null)
-        {
-            Console.WriteLine(String.Join(",", result));
-        }
-        else
-        {
-            Console.WriteLine("NULL");
-        }
+        int[] numbers = new int[] { 7, 14 };      //because call by reference not call by value
+        Console.WriteLine(CanSum(300, numbers));                         //https://stackoverflow.com/questions/37498677/passing-arrays-as-parameter
     }
 }

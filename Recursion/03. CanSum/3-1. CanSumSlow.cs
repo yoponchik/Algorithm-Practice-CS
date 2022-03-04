@@ -2,16 +2,17 @@
 
 class CanSumSlow
 {
+
+
     static bool CanSum(int targetSum, int[] numbers)
     {
 
         if (targetSum == 0) { return true; }
         if (targetSum < 0) { return false; }
 
-        foreach (var num in numbers)
-        {
+        foreach (var num in numbers){
             int remainder = targetSum - num;
-            if (CanSum(remainder, numbers)) { return true; }
+            if (CanSum(remainder, numbers) == true) { return true; }
         }
 
         return false;
@@ -23,3 +24,4 @@ class CanSumSlow
         Console.WriteLine(CanSum(300, numbers));                         //https://stackoverflow.com/questions/37498677/passing-arrays-as-parameter
     }
 }
+
