@@ -1,27 +1,48 @@
 ﻿using System;
 
-class GridTravellerFast
+class HowSumFast
 {
-    static Dictionary<Tuple<int, int>, long> _memo = new Dictionary<Tuple<int, int>, long>();
+    static Dictionary<int, int[]> _memo = new Dictionary<int, int[]>();
 
-    static long GridTravel(int m, int n)
+    static int[] HowSum(int targetSum, int[] numbers)
     {
-        Tuple<int, int> key;
-        key = Tuple.Create(m, n);
+        int[] emptyArray = new int[0];
+        if (_memo.ContainsKey(targetSum)) { return _memo[targetSum]; }
+        if (targetSum == 0) { return emptyArray; }
+        if (targetSum < 0) { return null; }
 
-        if (_memo.ContainsKey(key)) { return _memo[key]; }
-        if (m == 1 && n == 1) return 1;
-        if (m == 0 || n == 0) return 0;
+        foreach (var num in numbers)
+        {
+            var remainder = targetSum - num;
+            var remainderResult = HowSum(remainder, numbers);
 
-        _memo[key] = GridTravel(m - 1, n) + GridTravel(m, n - 1);
-        return _memo[key];
+            if (remainderResult != null)
+            {
+
+                _memo[targetSum] = remainderResult.Append(num).ToArray();
+
+                return _memo[targetSum];
+            }
+        }
+
+        _memo[targetSum] = null;
+        return null;
     }
-    static void Main(string[] args)
+
+    static void Main(string[] arg)
     {
-        Console.WriteLine(GridTravel(1, 1));
-        Console.WriteLine(GridTravel(2, 3));
-        Console.WriteLine(GridTravel(3, 2));
-        Console.WriteLine(GridTravel(3, 3));
-        Console.WriteLine(GridTravel(18, 18));
+        int[] numbers = new int[] { 7, 14 };
+        int[] numbers2 = new int[] { 100, 250 };
+
+        int[] result = HowSum(300, numbers2);
+
+        if (result != null)
+        {
+            Console.WriteLine(String.Join(",", result));                //this might help https://stackoverflow.com/questions/16265247/printing-all-contents-of-array-in-c-sharp
+        }
+        else
+        {
+            Console.WriteLine("NULL");
+        }
     }
 }
