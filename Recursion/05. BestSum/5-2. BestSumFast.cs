@@ -5,8 +5,7 @@ class BestSumFast
 
     static Dictionary<int, int[]> _memo = new Dictionary<int, int[]>();
 
-    static int[] BestSum(int targetSum, int[] numbers)
-    {
+    static int[] BestSum(int targetSum, int[] numbers){
         int[] emptyArray = new int[0];
 
         if (_memo.ContainsKey(targetSum)) { return _memo[targetSum]; }
@@ -15,16 +14,13 @@ class BestSumFast
 
         int[] shortestCombination = null;
 
-        foreach (var num in numbers)
-        {
+        foreach (var num in numbers){
             var remainder = targetSum - num;
             int[] remainderCombination = BestSum(remainder, numbers);
 
-            if (remainderCombination != null)
-            {
+            if (remainderCombination != null){
                 var validCombination = remainderCombination.Append(num).ToArray();
-                if (shortestCombination == null || validCombination.Length < shortestCombination.Length)
-                {
+                if (shortestCombination == null || validCombination.Length < shortestCombination.Length){
                     shortestCombination = validCombination;
                 }
             }
@@ -41,8 +37,7 @@ class BestSumFast
 
         int[] result = BestSum(8, numbers);
 
-        if (result != null)
-        {
+        if (result != null){
             Console.WriteLine(String.Join(",", result));
         }
         else { Console.WriteLine("NULL"); }
