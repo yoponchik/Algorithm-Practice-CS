@@ -38,5 +38,9 @@
 		-return totalCount;
 ---------------------------------------
 7. Main Function
+	-declare a new STRING[] wordBank
+		-string[] wordBank = new string[] { "s", "n", "i", "de", "d", "e", "sni" };
+	-Print
+		-Console.WriteLine(CountConstruct("snide", wordBank));
 ---------------------------------------
 IMPORTANT
