@@ -1,0 +1,58 @@
+1. Create a method. Think what is the output and the input.
+
+The input is iteration n, which can be INT type.
+The output is a whole number, but can be long: so LONG type
+
+remember the methods have to be static. 
+----------------------------------------------------
+
+2. First, BruteForce it. In the FIB method
+
+a. Determine the base case
+	-if n=1,2, then output is 1
+	-therefore, if (n <= 2), return 1;
+ 
+b. Determine what the output is in relation to the iteration n. (Have to work backwards)
+	-The output of the nth iteration is the sum of the one before that (n-1) and the one before that one (n-2)
+	-We can call it recursively: Fib(n-1) + Fib(n-2);
+c. Return it
+	-Return Fib(n-1) + Fib(n-2);
+
+d. Check in Main function (remember this is static too)
+	-Console.WriteLine(Fib(n));
+
+--------------------------------------------------------
+
+3. Memoize it
+
+a. Declare a Dictionary
+	-Determine what the keys are going to be
+	-keys are generally step/number/word that is repeated; in this case, n
+	-Dictionaries have two types to be declared: the key type and the value type
+	-Since we want the Fib output (LONG type value) using n (INT type key), declare a STATIC dictionary
+		-static Dictionary<int, long> _memo = new Dictionary<int, long>(); 
+
+	-Remember STATIC, KEY and VALUE type, and () in the end!!
+
+b. 2 places to implement the memo. (1) the return (2) the storing
+	-Near the base case return, return the memo
+		- if(_memo.ContainsKey(n)) {return _memo[n];}
+	-Store the original output as another variable
+		-var value = Fib(n-1) + Fib(n-2);
+	-Store into memo
+		-_memo[n] = value;
+	-Return the original output
+------------------------------------------------------------
+
+IMPORTANT NOTES
+
+-STATIC
+	-methods
+	-Dictionary
+-Notation
+	-Dictionary - () in the end
+	-ContainsKey()
+	-memo[n] - memo is sort of like an array, it has an index
+-Memo
+	-return it
+	-store it
