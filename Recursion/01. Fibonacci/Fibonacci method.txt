@@ -1,7 +1,4 @@
-1. Create a class
-
---------------------------------------------------------
-2. Create a method. Think what is the output and the input.
+1. Create a method. Think what is the output and the input.
 
 The input is iteration n, which can be INT type.
 The output is a whole number, but can be long: so LONG type
@@ -9,7 +6,7 @@ The output is a whole number, but can be long: so LONG type
 remember the methods have to be static. 
 ----------------------------------------------------
 
-3. First, BruteForce it. In the FIB method
+2. First, BruteForce it. In the FIB method
 
 a. Determine the base case
 	-if n=1,2, then output is 1
@@ -26,7 +23,7 @@ d. Check in Main function (remember this is static too)
 
 --------------------------------------------------------
 
-4. Memoize it
+3. Memoize it
 
 a. Declare a Dictionary
 	-Determine what the keys are going to be
@@ -44,7 +41,7 @@ b. 2 places to implement the memo. (1) the return (2) the storing
 		-var value = Fib(n-1) + Fib(n-2);
 	-Store into memo
 		-_memo[n] = value;
-	-Return the output that is not memoized
+	-Return the original output
 ------------------------------------------------------------
 
 IMPORTANT NOTES
@@ -59,6 +56,3 @@ IMPORTANT NOTES
 -Memo
 	-return it
 	-store it
-
--Question Type
-	-Sequential: Therfore only positive base case.
