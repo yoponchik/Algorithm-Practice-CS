@@ -22,7 +22,8 @@
 		-if(targetSum < 0) {return false;}
 			-we know they do not add up when it does not perfectly subtract to 0
 	-Computation
-		-Go through all the arrays one by one, and see if there is a match
+		-Make recursive call for every element of the numbers array
+			-Go through all the arrays one by one, and see if there is a match
 			-foreach(var num in numbers)
 		-What calculation are you doing at the branch?
 			-Subtract the num (numbers in the array) from the targetsum or remainder; 
