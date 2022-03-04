@@ -42,7 +42,7 @@
 	-create a Tuple key
 		-Tuple<int, int> key; key = Tuple.Create(m,n);
 
-	-return the memo
+	-Add base case to return the memo values
 		-if(_memo.ContainsKey(key)) {return _memo[key];}
 
 	-store the memo
@@ -66,3 +66,4 @@ IMPORTANT
 
 -Memoization
 	-When you output, you just have to think "What is memoized and what is not memoized?"
+

@@ -38,7 +38,7 @@ a. Declare a Dictionary
 	-Remember STATIC, KEY and VALUE type, and () in the end!!
 
 b. 2 places to implement the memo. (1) the return (2) the storing
-	-Near the base case return, return the memo
+	-Add a base case to return the memo values
 		- if(_memo.ContainsKey(n)) {return _memo[n];}
 	-Store the original output as another variable
 		-var value = Fib(n-1) + Fib(n-2);
