@@ -22,10 +22,10 @@ class BestSumFast
 
             if (remainderCombination != null)
             {
-                var shortenedCombination = remainderCombination.Append(num).ToArray();
-                if (shortestCombination == null || shortenedCombination.Length < shortestCombination.Length)
+                var validCombination = remainderCombination.Append(num).ToArray();
+                if (shortestCombination == null || validCombination.Length < shortestCombination.Length)
                 {
-                    shortestCombination = shortenedCombination;
+                    shortestCombination = validCombination;
                 }
             }
         }
