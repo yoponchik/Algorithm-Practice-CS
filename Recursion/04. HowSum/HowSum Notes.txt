@@ -1,0 +1,88 @@
+1. Determine the Problem Type and Visualize
+	-This is a Combinational-HOW Problem: Therefore, there are three cases. Base Case, None Case, and Combo case
+	-The tree is similar to the CanSum tree; however, instead of bubbling up the BOOL output, we have to start bubbling an array
+	-At the Positive Node, we take the Combo output ARRAY from the previous Node
+
+-----------------------------------------------
+
+2. Create a class
+------------------------------------------------
+
+3. Create a static method
+	-What is the Output type and the Input Type?
+		-Output: int[]
+		-Input: int, int[]
+	-static int[] HowSum(int targetSum, int[] numbers) 
+-------------------------------------------------
+
+4. Cases
+	-What types of cases are there?
+		-Base Case - Means we start from the bottom or zero, so start with empty array
+			-if(targetSum == 0){return Array.Empty<int>()}
+			-or you can do 
+				-Declare empty array; int[] empty = new int[0]
+				-if(targetSum == 0) {return empty;}
+		-None Case - Means the combo doesn't work out; we will return a null
+			if(targetSum <0 ){return null;}
+		-Combo Case - means the combo works out; return a recursion(later)
+
+-----------------------------------------------------
+
+5. Calculation
+	-We have to make a recursive call for every element in the number ARRAY
+		-foreach(var num in numbers)
+	-Declare a remainder assign the BRANCH calculation to it
+		-var remainder = targetSum - num;
+	=============
+	-Have to get to the Node, so do recursive call and store into ARRAY
+		-Declare a new int[] ARRAY remainderResult
+		- int[] remainderResult = HowSum(remainder, numbers)
+		-Two possibilities for remainder Result: Null or not null
+		
+		-Since in the loop iteration, we're just searching whether there is a positive COMBO
+		-The condition has to be the opposite of the Negative COMBO
+			-if(remainderResult != null) 
+		-Since, it's positive COMBO, we have to append the num to remainderRresult ARRAY and return it
+			-remainderResult.Append(num).ToArray();
+		-Return it
+			return remainderResult
+		-Can just do return remainderResult.Append(num).ToArray()
+	-At the end of the loop, we return null
+
+-------------------------------------------------------------
+
+6. Memoize it
+	-Create a static dictionary
+		-What is the key(input) type and the value(Output) type?
+			-Key: int; we don't need a tuple, because we only need to check with targetSum
+			-Value: int[]
+		-static Dictionary<int, int[]> _memo = new Dictionary<int, int[]>();
+
+	-Create a base case for _memo for returning the output _memo
+		-if(_memo.ContainsKey(targetSum)){return _memo[targetSum];}
+	-Memo all the outputs
+		-Positive Combo Output
+			-_memo[targetSum] = remainderResult.Append(num).ToArray();
+			-return _memo[targetSum]
+		-Negative Combo Output
+			-_memo[targetSum] = null;
+			-return null;
+
+--------------------------------------------------------------
+7. Main Function
+	-declare INT[] ARRAY numbers
+		-int[] numbers = new int[] {2,3, etc}
+	-The output can be a null
+		-to prevent an error, need to catch the null
+			-first store the result
+				-int[] result = HowSum(7, numbers);
+		-if(result != null){ Console.WriteLine(String.Join(",", result))};
+		-else{Console.WriteLine("Null")}
+		
+		- or you can do Console.WriteLine(result == null ? "Null": StringJoin(",", result));
+
+---------------------------------------------------------------
+IMPORTANT
+	-When appending, (name of the array).Append(variable to append).ToArray();
+		-dont forget ToArray()!
+	-When doing WriteLine, we need to do String.Join(",", result)!

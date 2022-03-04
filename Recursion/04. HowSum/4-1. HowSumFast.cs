@@ -11,13 +11,11 @@ class HowSumFast
         if (targetSum == 0) { return emptyArray; }
         if (targetSum < 0) { return null; }
 
-        foreach (var num in numbers)
-        {
+        foreach (var num in numbers){
             var remainder = targetSum - num;
             var remainderResult = HowSum(remainder, numbers);
 
-            if (remainderResult != null)
-            {
+            if (remainderResult != null){
 
                 _memo[targetSum] = remainderResult.Append(num).ToArray();
 
@@ -36,12 +34,10 @@ class HowSumFast
 
         int[] result = HowSum(300, numbers2);
 
-        if (result != null)
-        {
+        if (result != null){
             Console.WriteLine(String.Join(",", result));                //this might help https://stackoverflow.com/questions/16265247/printing-all-contents-of-array-in-c-sharp
         }
-        else
-        {
+        else{
             Console.WriteLine("NULL");
         }
     }

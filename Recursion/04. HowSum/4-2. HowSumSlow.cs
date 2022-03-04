@@ -1,10 +1,10 @@
 ﻿class HowSumSlow{
     static int[] HowSum(int targetSum, int[] numbers)
     {
-        int[] empty = new int[0];
-        if (targetSum == 0) return Array.Empty<int>();
+        //int[] empty = new int[0];
         //if (targetSum == 0) return empty;
         //if (targetSum < 0) throw new ArgumentException("NULL", nameof(targetSum));
+        if (targetSum == 0) return Array.Empty<int>();
         if (targetSum < 0) return null;
 
         foreach (var num in numbers)
